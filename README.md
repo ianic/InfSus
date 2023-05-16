@@ -1,0 +1,2 @@
+# InfSus
+Informacijski sustavi - zadaće
