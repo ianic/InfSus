@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-StomatoloskaPoliklinika-cb6ea0fe-a5f9-4a9e-aacd-352d893d3efb</UserSecretsId>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />

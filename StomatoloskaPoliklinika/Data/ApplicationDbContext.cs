@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StomatoloskaPoliklinika.Models;
 
@@ -12,5 +12,6 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<StomatoloskaPoliklinika.Models.Pacijent> Pacijent { get; set; } = default!;
     public DbSet<StomatoloskaPoliklinika.Models.UgovoreniSastanak> UgovoreniSastanak { get; set; } = default!;
+    public DbSet<StomatoloskaPoliklinika.Models.Stomatolog> Stomatolog { get; set; } = default!;
 }
 
