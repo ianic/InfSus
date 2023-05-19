@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StomatoloskaPoliklinika.Data;
 
@@ -10,9 +11,11 @@ using StomatoloskaPoliklinika.Data;
 namespace StomatoloskaPoliklinika.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518155654_initinalsetup")]
+    partial class initinalsetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -227,8 +230,9 @@ namespace StomatoloskaPoliklinika.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("IdPovijestBolesti")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("IdPovijestBolesti")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Ime")
                         .IsRequired()
@@ -245,29 +249,6 @@ namespace StomatoloskaPoliklinika.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pacijent");
-                });
-
-            modelBuilder.Entity("StomatoloskaPoliklinika.Models.UgovoreniSastanak", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DatumVrijeme")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("PacijentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PacijentId");
-
-                    b.ToTable("UgovoreniSastanak");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,18 +300,6 @@ namespace StomatoloskaPoliklinika.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StomatoloskaPoliklinika.Models.UgovoreniSastanak", b =>
-                {
-                    b.HasOne("StomatoloskaPoliklinika.Models.Pacijent", null)
-                        .WithMany("UgovorniSastanciLista")
-                        .HasForeignKey("PacijentId");
-                });
-
-            modelBuilder.Entity("StomatoloskaPoliklinika.Models.Pacijent", b =>
-                {
-                    b.Navigation("UgovorniSastanciLista");
                 });
 #pragma warning restore 612, 618
         }

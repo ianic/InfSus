@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StomatoloskaPoliklinika.Data;
 
@@ -10,9 +11,11 @@ using StomatoloskaPoliklinika.Data;
 namespace StomatoloskaPoliklinika.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518210709_newmigration")]
+    partial class newmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -256,7 +259,7 @@ namespace StomatoloskaPoliklinika.Data.Migrations
                     b.Property<DateTime>("DatumVrijeme")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("PacijentId")
+                    b.Property<int?>("IdPacijent")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Status")
@@ -265,7 +268,7 @@ namespace StomatoloskaPoliklinika.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacijentId");
+                    b.HasIndex("IdPacijent");
 
                     b.ToTable("UgovoreniSastanak");
                 });
@@ -325,7 +328,7 @@ namespace StomatoloskaPoliklinika.Data.Migrations
                 {
                     b.HasOne("StomatoloskaPoliklinika.Models.Pacijent", null)
                         .WithMany("UgovorniSastanciLista")
-                        .HasForeignKey("PacijentId");
+                        .HasForeignKey("IdPacijent");
                 });
 
             modelBuilder.Entity("StomatoloskaPoliklinika.Models.Pacijent", b =>
