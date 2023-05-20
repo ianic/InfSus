@@ -140,7 +140,7 @@ namespace StomatoloskaPoliklinikaTest
 
     }
     [TestClass]
-    public class DataAccessLayerTests
+    public class PodatkovniSlojUnitTests
     {
         private DbContextOptions<ApplicationDbContext> _options;
         private ApplicationDbContext _context;
@@ -171,7 +171,7 @@ namespace StomatoloskaPoliklinikaTest
         }
 
         [TestMethod]
-        public void UpdateStomatolog_ShouldUpdateStomatologInDatabase()
+        public void ShouldUpdateStomatolog()
         {
             var stomatolog = _context.Stomatolog.Find(1);
 
