@@ -36,6 +36,7 @@ namespace StomatoloskaPoliklinika.Controllers
             }
 
             var pacijent = await _context.Pacijent
+                 .Include(p => p.UgovorniSastanciLista)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pacijent == null)
             {
