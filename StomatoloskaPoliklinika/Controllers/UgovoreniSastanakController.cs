@@ -85,11 +85,14 @@ namespace StomatoloskaPoliklinika.Controllers
                 return NotFound();
             }
 
-            var ugovoreniSastanak = await _context.UgovoreniSastanak.FindAsync(id);
+            var ugovoreniSastanak = await _context.UgovoreniSastanak
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (ugovoreniSastanak == null)
             {
                 return NotFound();
             }
+            PopulatePacijentiDropDownList(ugovoreniSastanak.PacijentId);
             return View(ugovoreniSastanak);
         }
 
@@ -125,6 +128,7 @@ namespace StomatoloskaPoliklinika.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulatePacijentiDropDownList(ugovoreniSastanak.PacijentId);
             return View(ugovoreniSastanak);
         }
 
