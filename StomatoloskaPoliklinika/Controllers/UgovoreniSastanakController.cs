@@ -23,7 +23,7 @@ namespace StomatoloskaPoliklinika.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.UgovoreniSastanak != null ? 
-                          View(await _context.UgovoreniSastanak.ToListAsync()) :
+                          View(await _context.UgovoreniSastanak.Include(u => u.Pacijent).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.UgovoreniSastanak'  is null.");
         }
 
