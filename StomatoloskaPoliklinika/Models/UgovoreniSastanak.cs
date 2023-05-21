@@ -10,7 +10,7 @@ namespace StomatoloskaPoliklinika.Models
 
         public int? PacijentId { get; set; }
 
-        public virtual Pacijent pacijent { get; private set; }
+        public Pacijent? Pacijent { get; set; }
 
         public UgovoreniSastanak()
 		{

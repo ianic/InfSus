@@ -48,6 +48,7 @@ namespace StomatoloskaPoliklinika.Controllers
         // GET: UgovoreniSastanak/Create
         public IActionResult Create()
         {
+            PopulatePacijentiDropDownList();
             return View();
         }
 
@@ -64,11 +65,20 @@ namespace StomatoloskaPoliklinika.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulatePacijentiDropDownList(ugovoreniSastanak.PacijentId);
             return View(ugovoreniSastanak);
         }
 
-        // GET: UgovoreniSastanak/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        private void PopulatePacijentiDropDownList(object selectedPacijent = null)
+        {
+            var pacijentQuery = from d in _context.Pacijent
+                                   orderby d.Ime
+                                   select d;
+            ViewBag.PacijentId = new SelectList(pacijentQuery.AsNoTracking(), "Id", "Ime", selectedPacijent);
+        }
+
+    // GET: UgovoreniSastanak/Edit/5
+    public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.UgovoreniSastanak == null)
             {
