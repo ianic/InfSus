@@ -156,12 +156,12 @@ namespace StomatoloskaPoliklinikaTest
 
             var stomatolog = new Stomatolog
             {
-                Id = 1,
+                Id = 10,
                 Ime = "Mario",
                 Prezime = "Maric",
                 BrojTelefona = "123456789",
                 Email = "mario.maric@gmail.com",
-                Lozinka = "mario",
+                Lozinka = "mario123",
                 Specijalizacija = "Opæa stomatologija",
                 Cijena = 100
             };
@@ -173,7 +173,7 @@ namespace StomatoloskaPoliklinikaTest
         [TestMethod]
         public void ShouldUpdateStomatolog()
         {
-            var stomatolog = _context.Stomatolog.Find(1);
+            var stomatolog = _context.Stomatolog.Find(10);
 
             Assert.AreEqual("Mario", stomatolog.Ime);
             Assert.AreEqual("Maric", stomatolog.Prezime);
@@ -183,7 +183,7 @@ namespace StomatoloskaPoliklinikaTest
 
             _context.SaveChanges();
 
-            var updatedStomatolog = _context.Stomatolog.Find(1);
+            var updatedStomatolog = _context.Stomatolog.Find(10);
             Assert.AreEqual("Ivan", updatedStomatolog.Ime);
             Assert.AreEqual("Ivic", updatedStomatolog.Prezime);
         }
