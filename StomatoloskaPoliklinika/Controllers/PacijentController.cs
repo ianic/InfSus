@@ -133,6 +133,7 @@ namespace StomatoloskaPoliklinika.Controllers
             }
 
             var pacijent = await _context.Pacijent
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pacijent == null)
             {
@@ -156,7 +157,13 @@ namespace StomatoloskaPoliklinika.Controllers
             {
                 _context.Pacijent.Remove(pacijent);
             }
-            
+
+            var ugovoreniSastanciPacijenta = await _context.UgovoreniSastanak
+                .Where(u => u.PacijentId == id)
+                .ToListAsync();
+            ugovoreniSastanciPacijenta.ForEach(u => _context.UgovoreniSastanak.Remove(u));
+            //ugovoreniSastanciPacijenta.ForEach(u => u.PacijentId = null);
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
