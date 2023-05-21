@@ -36,7 +36,7 @@ namespace StomatoloskaPoliklinika.Controllers
         // GET: Stomatolog/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            SearchPhrase = SearchPhrase.ToLower();
+            SearchPhrase = SearchPhrase?.ToLower();
             return View("Index", await _context.Stomatolog
                 .Where(s => (s.Prezime+" "+s.Ime).ToLower().Contains(SearchPhrase) || (s.Ime+" "+s.Prezime).ToLower().Contains(SearchPhrase)).ToListAsync());
         }
@@ -183,13 +183,11 @@ namespace StomatoloskaPoliklinika.Controllers
         }
         private bool IsPasswordValid(string password)
         {
-            // Check if the password is at least 6 characters long
             if (password.Length < 6)
             {
                 return false;
             }
 
-            // Check if the password contains both letters and numbers
             bool hasLetters = false;
             bool hasNumbers = false;
 
@@ -204,7 +202,6 @@ namespace StomatoloskaPoliklinika.Controllers
                     hasNumbers = true;
                 }
 
-                // If we have found both letters and numbers, no need to continue checking
                 if (hasLetters && hasNumbers)
                 {
                     break;
